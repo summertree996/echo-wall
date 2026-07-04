@@ -1,0 +1,16 @@
+[Unit]
+Description=ECHO FastAPI service
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/echo-wall
+EnvironmentFile=/opt/echo-wall/.env
+ExecStart=/opt/echo-wall/.venv/bin/python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000 --workers 1
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
